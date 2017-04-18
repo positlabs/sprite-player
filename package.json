@@ -1,0 +1,23 @@
+{
+  "name": "sprite-player",
+  "version": "0.1.0",
+  "description": "Web component for controlling sprite sheet animations.",
+  "main": "docs/sprite-player.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "build": "browserify src/sprite-player.js -o docs/sprite-player.js",
+    "watch": "budo src/sprite-player.js:docs/sprite-player.js --open --live --cors --dir ./"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/positlabs/sprite-player.git"
+  },
+  "author": "Josh Beckwith <josh@positlabs.com> (https://github.com/positlabs)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/positlabs/sprite-player/issues"
+  },
+  "homepage": "https://github.com/positlabs/sprite-player#readme"
+}
