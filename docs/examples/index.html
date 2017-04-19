@@ -10,10 +10,10 @@
 				color: white;
 				font-family: sans-serif;
 			}
-			poly-refractor {
+			sprite-player {
 				position: absolute;
-				top: 0; left: 0;
-				width: 100%; height: 100%;
+				top: 50%; left: 50%;
+				transform: translate(-50%, -50%);
 			}
 		</style>
 	</head>
@@ -22,6 +22,8 @@
 		
 		<script src='https://cdnjs.cloudflare.com/ajax/libs/x-tag/1.5.11/x-tag-core.js'></script>
 		<script src='../sprite-player.js'></script>
+
+		<sprite-player src="./assets/run.png" rows="1" cols="8" fps="12" autoplay loop></sprite-player>
 		
 		<script>
 			
