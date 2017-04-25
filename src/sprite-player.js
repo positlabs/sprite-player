@@ -1,12 +1,6 @@
 /*
 
-	play: Sent when playback of the media starts after having been paused; that is, when playback is resumed after a prior pause event.
-	playing: Sent when the media begins to play (either for the first time, after having been paused, or after ending and then restarting).
-	pause: Sent when playback is paused.
-	ended: Sent when playback completes.
-	loadstart: Sent when loading of the media begins.
-	load: Sent when media is loaded.
-	error: Sent when media failed to load
+	https://github.com/positlabs/sprite-player
 
 */
 
@@ -20,11 +14,6 @@ const lifecycle = {
 		this._prevTime = Date.now()
 		this._img = document.createElement('img')
 		this._render()
-	},
-	inserted(){
-		// setTimeout(() => {
-		// 	if(this.autoplay) this.play()
-		// }, 0)
 	},
 	removed(){
 		this._paused = true
@@ -100,8 +89,14 @@ const accessors = {
 			return this._paused
 		},
 		set(val){
+			if(this._paused === val) return
 			this._paused = val
-			if(val){ xtag.fireEvent(this, 'pause') }
+			if(this._paused){
+				xtag.fireEvent(this, 'pause')
+			}else {
+				xtag.fireEvent(this, 'play')
+				this._onFrame()
+			}
 		},
 	},
 
@@ -114,8 +109,6 @@ const accessors = {
 const methods = {
 	play(){
 		this.paused = false
-		xtag.fireEvent(this, 'play')
-		this._onFrame()
 	},
 
 	pause(){
