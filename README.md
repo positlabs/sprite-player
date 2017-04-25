@@ -1,7 +1,7 @@
 # &lt;sprite-player&gt;
 Web component for controlling sprite sheet animations.
 
-[![npm version](https://badge.fury.io/js/sprite-player.svg)](https://github.com/positlabs\/sprite-player)
+[![npm version](https://badge.fury.io/js/sprite-player.svg)](https://www.npmjs.com/package/sprite-player)
 
 	npm install --save sprite-player
 
