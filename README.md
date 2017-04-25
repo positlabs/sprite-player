@@ -26,13 +26,13 @@ https://positlabs.github.io/sprite-player/examples/
 
 ### Attributes
 
-**src**: (`string`) Path to sprite image.
+**src**: (`string`) Path to sprite image. Required.
+
+**rows**: (`int`) Number of rows in the sprite. Required.
+
+**cols**: (`int`) Number of columns in the sprite. Required.
 
 **frames**: (`int`) Number of frames in the animation. Defaults to `rows * cols`.
-
-**rows**: (`int`) Number of rows in the sprite.
-
-**cols**: (`int`) Number of columns in the sprite.
 
 **fps**: (`Number`) Frames per second. Defaults to 30.
 
