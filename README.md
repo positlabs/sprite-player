@@ -34,11 +34,11 @@ https://positlabs.github.io/sprite-player/examples/
 
 **cols**: (`int`) Number of columns in the sprite.
 
-**fps**: (`Number`) Frames per second.
+**fps**: (`Number`) Frames per second. Defaults to 30.
 
-**autoplay**: (`Boolean`) Automatically play the animation as soon as the `src` is loaded.
+**autoplay**: (`Boolean`) Automatically play the animation as soon as the `src` is loaded. Defaults to `false`.
 
-**loop**: (`Boolean`) Automatically replay the animation when it ends.
+**loop**: (`Boolean`) Automatically replay the animation when it ends. Defaults to `false`.
 
 ### Properties
 

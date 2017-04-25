@@ -46,16 +46,6 @@ const accessors = {
 		}
 	},
 	
-	frames: {
-		attribute: {},
-		get(){
-			return this._frames !== undefined ? this._frames : this.rows * this.cols
-		},
-		set(val){
-			this._frames = parseInt(val)
-		}
-	},
-	
 	rows: {
 		attribute: {},
 		get(){return this._rows},
@@ -66,6 +56,16 @@ const accessors = {
 		attribute: {},
 		get(){return this._cols},
 		set(val){this._cols = parseInt(val)}
+	},
+
+	frames: {
+		attribute: {},
+		get(){
+			return this._frames !== undefined ? this._frames : this.rows * this.cols
+		},
+		set(val){
+			this._frames = parseInt(val)
+		}
 	},
 	
 	fps: {
