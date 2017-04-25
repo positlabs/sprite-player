@@ -51,6 +51,7 @@ Note: All attributes are accessible as properties.
 ### Methods
 
 **play**: Plays the animation. Sets `paused` to `false`.
+
 **pause**: Pauses the animation. Sets `paused` to `true`.
 
 ### Events
