@@ -1,33 +1,62 @@
+/*
+
+	play: Sent when playback of the media starts after having been paused; that is, when playback is resumed after a prior pause event.
+	playing: Sent when the media begins to play (either for the first time, after having been paused, or after ending and then restarting).
+	pause: Sent when playback is paused.
+	ended: Sent when playback completes.
+	loadstart: Sent when loading of the media begins.
+	load: Sent when media is loaded.
+	error: Sent when media failed to load
+
+*/
+
 
 const componentName = 'sprite-player'
 
 const lifecycle = {
 	created(){
-		this.paused = true
+		this._paused = true
 		this._frame = 0
 		this._prevTime = Date.now()
 		this._img = document.createElement('img')
 		this._render()
 	},
 	inserted(){
-		if(this.autoplay) this.play()
+		// setTimeout(() => {
+		// 	if(this.autoplay) this.play()
+		// }, 0)
 	},
 	removed(){
-		this.paused = true
+		this._paused = true
 	}
 }
 
 const accessors = {
+
+	/*
+		attributes
+	*/
+	
 	src: {
 		attribute: {},
 		get(){return this._src},
 		set(val){
 			this._src = val
 			this._img = document.createElement('img')
+			xtag.fireEvent(this, 'loadstart')
+			this._img.onload = () => {
+				xtag.fireEvent(this, 'load')
+				this._resize()
+				if(this.autoplay) this.play()
+			}
+			this._img.onerror = () => {
+				xtag.fireEvent(this, 'error', {message: 'failed to load ' + this._src})
+				this._paused = true
+			}
 			this._img.src = val
-			this._img.onload = () => {this._resize()}
 		}
 	},
+	
 	frames: {
 		attribute: {},
 		get(){
@@ -37,36 +66,60 @@ const accessors = {
 			this._frames = parseInt(val)
 		}
 	},
+	
 	rows: {
 		attribute: {},
 		get(){return this._rows},
 		set(val){this._rows = parseInt(val)}
 	},
+	
 	cols: {
 		attribute: {},
 		get(){return this._cols},
 		set(val){this._cols = parseInt(val)}
 	},
+	
 	fps: {
-		attribute: {
-			def: 30
-		},
+		attribute: { def: 30 },
 		get(){return this._fps},
 		set(val){
 			this._fps = parseInt(val)
 			this._fpsMillis = 1000 / this._fps
 		}
 	},
+	
 	autoplay: { attribute: { boolean: true } },
+	
 	loop: { attribute: { boolean: true } },
-	paused: { attribute: { boolean: true } }
+	
+	/*
+		properties
+	*/
+	paused: {
+		get(){
+			return this._paused
+		},
+		set(val){
+			this._paused = val
+			if(val){ xtag.fireEvent(this, 'pause') }
+		},
+	},
+
+	duration: {
+		get(){ return this.frames / this.fps }
+	}
 	
 }
 
 const methods = {
 	play(){
 		this.paused = false
+		xtag.fireEvent(this, 'play')
 		this._onFrame()
+	},
+
+	pause(){
+		this.paused = true
 	},
 
 	_render (){
@@ -90,14 +143,17 @@ const methods = {
 		var time = Date.now()
 		if(time - this._prevTime < this._fpsMillis){ return }
 
+		// fire playing event on first frame
+		if(this._frame === 0){ xtag.fireEvent(this, 'playing') }
+
 		this._draw()
 		this._frame = (this._frame + 1) % this.frames
 		this._prevTime = time
 
 		if(this._frame === 0 && !this.loop){
 			this._paused = true
+			xtag.fireEvent(this, 'ended')
 		}
-
 	},
 
 	_draw(){

@@ -20,14 +20,33 @@
 
 	<body>
 		
+		<!-- load the x-tag lib -->
 		<script src='https://cdnjs.cloudflare.com/ajax/libs/x-tag/1.5.11/x-tag-core.js'></script>
+
+		<!-- load sprite-player component -->
 		<script src='../sprite-player.js'></script>
 
+		<!-- use it! -->
 		<sprite-player src="./assets/run.png" rows="1" cols="8" fps="12" autoplay loop></sprite-player>
 		
 		<script>
 			
 			var player = document.querySelector('sprite-player')
+			console.dir(player)
+
+			var events = [
+				'play',
+				'playing',
+				'ended',
+				'pause',
+				'error',
+				'loadstart',
+				'load'
+			]
+
+			events.forEach(function(evtName){
+				player.addEventListener(evtName, function(e){ console.log(evtName, e) })
+			})
 
 		</script>
 
