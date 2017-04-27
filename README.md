@@ -54,6 +54,8 @@ Note: All attributes are accessible as properties.
 
 **pause**: Pauses the animation. Sets `paused` to `true`.
 
+**reset**: Resets the animation to the first frame.
+
 ### Events
 
 **play**: Sent when playback of the media starts after having been paused; that is, when playback is resumed after a prior pause event.

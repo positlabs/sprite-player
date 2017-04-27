@@ -4,7 +4,6 @@
 
 */
 
-
 const componentName = 'sprite-player'
 
 const lifecycle = {
@@ -113,6 +112,10 @@ const methods = {
 
 	pause(){
 		this.paused = true
+	},
+
+	reset(){
+		this._frame = 0
 	},
 
 	_render (){

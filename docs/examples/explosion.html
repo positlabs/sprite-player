@@ -16,6 +16,13 @@
 				transform: translate(-50%, -50%);
 				mix-blend-mode: screen;
 			}
+			p {
+				position: absolute;
+				width: 100%;
+				top: 50%;
+				text-align: center;
+				margin-top: 60px;
+			}
 		</style>
 	</head>
 
@@ -24,12 +31,20 @@
 		<script src='https://cdnjs.cloudflare.com/ajax/libs/x-tag/1.5.11/x-tag-core.js'></script>
 		<script src='../sprite-player.js'></script>
 
-		<sprite-player src="./assets/explosion.png" rows="9" cols="9" frames="74" fps="60" autoplay loop></sprite-player>
+		<sprite-player src="./assets/explosion.png" rows="9" cols="9" frames="74" fps="60"></sprite-player>
+
+		<p>click to explode</p>
 		
 		<script>
 			
 			var player = document.querySelector('sprite-player')
 			console.dir(player)
+
+			document.body.addEventListener('click', function(e){
+				e.preventDefault()
+				player.reset()
+				player.play()
+			})
 
 		</script>
 
